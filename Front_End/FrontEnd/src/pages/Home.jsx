@@ -46,17 +46,17 @@ export default function Home() {
   return (
     <div className="container">
       <div className="py-4">
-        <table className="table border shadow">
+        <table className="table border shadow mr-20 items-center" style={{width:"90vw"}} >
           <thead>
           <tr>
-                  <th scope='col'>Traid_id</th>
-                  <th scope='col'>Traid_Date_Time</th>
+                  <th scope='col'>Trade_id</th>
+                  <th scope='col'>Trade_Date_Time</th>
                   <th scope='col'>StockName</th>
                   <th scope='col'>ListingPrice</th>
                   <th scope='col'>Quantity</th>
                   <th scope='col'>Type(buy/sell)</th>                  
                   <th scope='col'>price_per_unit</th>
-                  <th scope='col'>Actions</th>
+                  <th scope='col' className="itmes-center">Actions</th>
                 </tr>
           </thead>
           <tbody>
@@ -85,7 +85,7 @@ export default function Home() {
                     Delete
                   </button>
                   <button
-                    className="btn btn-danger mx-2"
+                    className="btn btn-success mx-2"
                     onClick={() => handleCreateOrder(trade.id)}
                   >
                     Create Order

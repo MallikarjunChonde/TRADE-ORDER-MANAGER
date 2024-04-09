@@ -1,4 +1,3 @@
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -17,21 +16,9 @@ export default function Edittrade() {
     pricePerUnit: "",
   });
 
-   const onInputChange = (e) => {
-    const name = e.target.name;
-    const data = e.target.value;
-    name === "stockName"
-      ? setTrade({ ...trade, stockName: data })
-      : name === "listingPrice"
-      ? setTrade({ ...trade, listingPrice: data })
-      : name === "quantity"
-      ? setTrade({ ...trade, quantity: data })
-      : name === "type"
-      ? setTrade({ ...trade, type: data })
-      : name === "tradeDateTime"
-      ? setTrade({ ...trade, tradeDateTime: data })
-      : name === "pricePerUnit" 
-      && setTrade({ ...trade, pricePerUnit: data });
+  const onInputChange = (e) => {
+    const { name, value } = e.target;
+    setTrade({ ...trade, [name]: value });
   };
 
   useEffect(() => {
@@ -40,21 +27,23 @@ export default function Edittrade() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const response = await axios.post("http://localhost:8080/trade-details/update", trade, {
-      headers:{
-        "Content-Type":"application/json"
+    const response = await axios.put(`http://localhost:8080/trade-details/update/${id}`, trade, {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
-    if(response.status === 200) {
-      console.log(response.data.data)
-      navigate("/")
-     }
-     else console.log("error")
+    );
+    if (response.status === 200) {
+      console.log(response.data.data);
+      navigate("/");
+    } else console.log("error");
   };
 
   const loadtrade = async () => {
     const response = await axios.get(`http://localhost:8080/trade-details/${id}`);
-    setTrade(response.data.data);
+    setTrade({
+      ...response.data.data,
+      tradeDateTime: response.data.data.tradeDateTime.split('.')[0],});
   };
 
   const {
@@ -75,14 +64,14 @@ export default function Edittrade() {
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="TradeDateTime" className="form-label">
-                TradeDateTime
+                Trade Date Time
               </label>
               <input
-                type={"datetime-local"}
+                type="datetime-local"
                 className="form-control"
                 placeholder="Enter your TradeDateTime"
                 name="tradeDateTime"
-                value={new Date(tradeDateTime)}
+                value={tradeDateTime}
                 onChange={(e) => onInputChange(e)}
               />
             </div>
@@ -91,7 +80,7 @@ export default function Edittrade() {
                 Stock Name
               </label>
               <input
-                type={"text"}
+                type="text"
                 className="form-control"
                 placeholder="Enter your StockName"
                 name="stockName"
@@ -104,7 +93,7 @@ export default function Edittrade() {
                 Listing Price
               </label>
               <input
-                type={"number"}
+                type="number"
                 className="form-control"
                 placeholder="Enter trade listing price"
                 name="listingPrice"
@@ -117,7 +106,7 @@ export default function Edittrade() {
                 Quantity
               </label>
               <input
-                type={"number"}
+                type="number"
                 className="form-control"
                 placeholder="Enter your Quantity"
                 name="quantity"
@@ -130,7 +119,7 @@ export default function Edittrade() {
                 Type(buy/sell)
               </label>
               <input
-                type={"text"}
+                type="text"
                 className="form-control"
                 placeholder="Enter buy/sell"
                 name="type"
@@ -143,7 +132,7 @@ export default function Edittrade() {
                 Price Per Unit
               </label>
               <input
-                type={"text"}
+                type="text"
                 className="form-control"
                 placeholder="Enter your Price Per Unit"
                 name="pricePerUnit"

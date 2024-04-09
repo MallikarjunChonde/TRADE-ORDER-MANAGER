@@ -54,6 +54,8 @@ export default function Addtrade() {
      else console.log("error")
   };
 
+  
+
   return (
     <div className="container">
       <div className="row">
@@ -63,7 +65,7 @@ export default function Addtrade() {
           <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="TradeDateTime" className="form-label">
-                TradeDateTime
+                Trade Date Time
               </label>
               <input
                 type={"datetime-local"}
@@ -113,6 +115,7 @@ export default function Addtrade() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
+            <section>
             <div className="mb-3">
               <label htmlFor="Type" className="form-label">
                 Type(buy/sell)
@@ -126,6 +129,7 @@ export default function Addtrade() {
                 onChange={(e) => onInputChange(e)}
               />
             </div>
+            </section>
             <div className="mb-3">
               <label htmlFor="PricePerUnit" className="form-label">
                 Price Per Unit
@@ -149,6 +153,5 @@ export default function Addtrade() {
         </div>
       </div>
     </div>
-  );
-  5;
-}
+    );
+  }

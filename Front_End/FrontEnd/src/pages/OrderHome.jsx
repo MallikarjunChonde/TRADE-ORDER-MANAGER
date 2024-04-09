@@ -27,8 +27,8 @@ export default function OrderHome() {
         <table className="table border shadow">
           <thead>
           <tr>
-                  <th scope='col'>Traid_id</th>
-                  <th scope='col'>Traid_Date_Time</th>
+                  <th scope='col'>Trade_id</th>
+                  <th scope='col'>Trade_Date_Time</th>
                   <th scope='col'>StockName</th>
                   <th scope='col'>ListingPrice</th>
                   <th scope='col'>Quantity</th>
@@ -50,7 +50,6 @@ export default function OrderHome() {
                 <td>{order.tradeDetails.type}</td>
                 <td>{order.tradeDetails.pricePerUnit}</td>
                 <td>{order.orderStatus}</td>
-                <td></td>
               </tr>
             ))}
           </tbody>
